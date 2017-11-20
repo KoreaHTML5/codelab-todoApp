@@ -1,14 +1,34 @@
 <ion-header>
   <ion-navbar>
+    <ion-buttons start>
+      <button ion-button 
+        (click)="openNewTodo()">
+        <ion-icon ios="ios-create-outline" md="md-create"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
-      Ionic Blank
+      할 일 목록
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let todo of todos">
+      <button ion-item 
+        (click)="openTodo(todo.id)">
+        <h2>{{todo.title}}</h2>
+        <p>{{todo.description}}</p>
+        <div item-end *ngIf="todo.complete">
+          <ion-icon name="checkbox-outline"></ion-icon>
+        </div>
+      </button>
+      <ion-item-options>
+        <button ion-button color="danger"
+          (click)="deleteTodo(todo.id)">
+          <ion-icon name="trash"></ion-icon>삭제
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
